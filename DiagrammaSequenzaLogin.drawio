@@ -13,10 +13,10 @@
         <mxCell id="u3fZA9bNuohXF1SgQUcr-7" value=":Login" style="shape=umlLifeline;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=light-dark(#60A917,#00CC00);fontColor=#000000;strokeColor=light-dark(#000105,#00CC00);points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=rectanglePerimeter;targetShapes=umlLifeline;participant=label;fontStyle=1;fontSize=16;" parent="1" vertex="1">
           <mxGeometry x="192" y="360" width="100" height="564" as="geometry" />
         </mxCell>
-        <mxCell id="r0Xz2cJp1GwxHfEGbQWo-5" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="u3fZA9bNuohXF1SgQUcr-7">
+        <mxCell id="r0Xz2cJp1GwxHfEGbQWo-5" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="u3fZA9bNuohXF1SgQUcr-7" vertex="1">
           <mxGeometry x="45" y="132" width="10" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="r0Xz2cJp1GwxHfEGbQWo-6" value="verificaCredenziali()" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" target="r0Xz2cJp1GwxHfEGbQWo-5" parent="u3fZA9bNuohXF1SgQUcr-7" source="r0Xz2cJp1GwxHfEGbQWo-5">
+        <mxCell id="r0Xz2cJp1GwxHfEGbQWo-6" value="verificaCredenziali()" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" parent="u3fZA9bNuohXF1SgQUcr-7" source="r0Xz2cJp1GwxHfEGbQWo-5" target="r0Xz2cJp1GwxHfEGbQWo-5" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="60" y="156" as="sourcePoint" />
             <Array as="points">
@@ -25,7 +25,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="u3fZA9bNuohXF1SgQUcr-9" value=":Logger" style="shape=umlLifeline;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=light-dark(#FA6800,#3399FF);fontColor=#000000;strokeColor=light-dark(#C73500,#3399FF);points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=rectanglePerimeter;targetShapes=umlLifeline;participant=label;fontStyle=1;fontSize=16;" parent="1" vertex="1">
+        <mxCell id="u3fZA9bNuohXF1SgQUcr-9" value=":Login" style="shape=umlLifeline;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=rectanglePerimeter;targetShapes=umlLifeline;participant=label;fontStyle=1;fontSize=16;" parent="1" vertex="1">
           <mxGeometry x="443" y="456" width="112" height="156" as="geometry" />
         </mxCell>
         <mxCell id="u3fZA9bNuohXF1SgQUcr-11" value="verificaCredenziali()" style="endArrow=block;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;" parent="1" source="u3fZA9bNuohXF1SgQUcr-4" edge="1">
@@ -50,7 +50,7 @@
             <mxPoint x="47" y="3" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="u3fZA9bNuohXF1SgQUcr-25" value="scrivi()" style="endArrow=block;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;" parent="1" target="u3fZA9bNuohXF1SgQUcr-9" edge="1">
+        <mxCell id="u3fZA9bNuohXF1SgQUcr-25" value="scriviLog()" style="endArrow=block;endFill=1;html=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=top;rounded=0;" parent="1" target="u3fZA9bNuohXF1SgQUcr-9" edge="1">
           <mxGeometry x="-0.1099" y="9" relative="1" as="geometry">
             <mxPoint x="247" y="561" as="sourcePoint" />
             <mxPoint x="444.0000000000002" y="552" as="targetPoint" />
