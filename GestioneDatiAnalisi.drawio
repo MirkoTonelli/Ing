@@ -1,0 +1,33 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36" version="27.1.6">
+  <diagram name="Pagina-1" id="MmKzUvvPy99WyJFojFwT">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="u_dnoeRa9B9ee2ACo3f6-1" value="Package" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=30;tabPosition=left;html=1;boundedLbl=1;labelInHeader=1;container=1;collapsible=0;whiteSpace=wrap;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="200" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="u_dnoeRa9B9ee2ACo3f6-2" value="" style="html=1;strokeColor=none;resizeWidth=1;resizeHeight=1;fillColor=none;part=1;connectable=0;allowArrows=0;deletable=0;whiteSpace=wrap;" vertex="1" parent="u_dnoeRa9B9ee2ACo3f6-1">
+          <mxGeometry width="150" height="107.94923076923075" relative="1" as="geometry">
+            <mxPoint y="30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="u_dnoeRa9B9ee2ACo3f6-3" value="ControllerAnalisi" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#60A917;swimlaneFillColor=#60A917;strokeColor=#FFFFFF;fontColor=#FFFFFF;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" vertex="1" parent="u_dnoeRa9B9ee2ACo3f6-1">
+          <mxGeometry x="20" y="49.99999999999999" width="158.89" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="u_dnoeRa9B9ee2ACo3f6-4" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=bottom;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=none;dashed=1;perimeterSpacing=0;noLabel=0;" vertex="1" parent="u_dnoeRa9B9ee2ACo3f6-3">
+          <mxGeometry y="26" width="158.89" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="u_dnoeRa9B9ee2ACo3f6-5" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=bottom;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=default;dashed=1;perimeterSpacing=0;noLabel=0;" vertex="1" parent="u_dnoeRa9B9ee2ACo3f6-3">
+          <mxGeometry y="50" width="158.89" height="12.249999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="u_dnoeRa9B9ee2ACo3f6-6" value="+ analizza(Rilevazione)&lt;div&gt;+ notificaUtenti()&lt;/div&gt;&lt;div&gt;+ memorizza(Rilevazione)&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="u_dnoeRa9B9ee2ACo3f6-3">
+          <mxGeometry y="62.25" width="158.89" height="57.75" as="geometry" />
+        </mxCell>
+        <mxCell id="u_dnoeRa9B9ee2ACo3f6-7" value="&lt;font style=&quot;color: rgb(255, 255, 255);&quot;&gt;GestioneDati&lt;/font&gt;" style="fontStyle=1;whiteSpace=wrap;html=1;fillColor=#60A917;" vertex="1" parent="u_dnoeRa9B9ee2ACo3f6-1">
+          <mxGeometry width="120" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
