@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      background: #18181b;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-box {
+      background: #23232a;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #0005;
+      padding: 36px 32px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 320px;
+    }
+    .login-box h2 {
+      margin-bottom: 28px;
+      color: #fff;
+      font-size: 1.7rem;
+      letter-spacing: 1px;
+    }
+    .login-box label {
+      font-size: 1rem;
+      margin-bottom: 4px;
+      color: #bbb;
+      align-self: flex-start;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 8px;
+      border: none;
+      margin-bottom: 18px;
+      font-size: 1rem;
+      background: #2d2d37;
+      color: #fff;
+      box-sizing: border-box;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 12px 0;
+      border-radius: 8px;
+      border: none;
+      background: #6366f1;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.13rem;
+      cursor: pointer;
+      transition: background 0.18s;
+      margin-top: 6px;
+    }
+    .login-box button:hover {
+      background: #818cf8;
+    }
+  </style>
+</head>
+<body>
+  <form class="login-box" onsubmit="login(event)">
+    <h2>Login</h2>
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="inserisci username" required>
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="inserisci password" required>
+    <button type="submit">Accedi</button>
+  </form>
+  <script>
+    function login(event) {
+      event.preventDefault();
+      // Get form values (just for demo)
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      // Simple demo: show an alert
+      alert(`Username: ${user}\nPassword: ${pass}`);
+      // In real life, send these to your server for authentication!
+    }
+  </script>
+</body>
+</html>
