@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IFrame Centered & Top Right Buttons</title>
+  <style>
+    body {
+      margin: 0;
+      background: #18181b;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+    .top-right-buttons {
+      position: fixed;
+      top: 32px;
+      right: 40px;
+      display: flex;
+      gap: 16px;
+      z-index: 100;
+    }
+    .top-right-buttons button {
+      background: #23232a;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 22px;
+      font-size: 1.03rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 3px 12px #0003;
+      transition: background 0.15s;
+    }
+    .top-right-buttons button:hover {
+      background: #6366f1;
+    }
+    .center-frame-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .main-iframe {
+      width: 1300px;
+      height: 700px;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #0006;
+      border: none;
+      background: #2d2d37;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-right-buttons">
+<a href="storico.html">
+
+    <button>apri storico</button>
+<a>
+<a href="registrazione.html">
+
+    <button>registrati</button>
+</a>
+
+<a href="login.html">
+    <button>accedi</button>
+</a>
+  </div>
+  <div class="center-frame-container">
+    <iframe class="main-iframe"
+      src="https://maps.google.com/maps?q=Rome,%20Italy&t=&z=13&ie=UTF8&iwloc=&output=embed"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</body>
+</html>

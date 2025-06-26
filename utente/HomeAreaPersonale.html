@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IFrame Centered & Top Right Buttons</title>
+  <style>
+    body {
+      margin: 0;
+      background: #18181b;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+    .top-right-buttons {
+      position: fixed;
+      top: 32px;
+      right: 40px;
+      display: flex;
+      gap: 16px;
+      z-index: 100;
+    }
+    .top-right-buttons button,
+    .top-left-buttons button {
+      background: #23232a;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 22px;
+      font-size: 1.03rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 3px 12px #0003;
+      transition: background 0.15s;
+    }
+    .top-right-buttons button:hover,
+    .top-left-buttons button:hover {
+      background: #6366f1;
+    }
+    .top-left-buttons {
+      position: fixed;
+      top: 32px;
+      left: 40px;
+      z-index: 100;
+    }
+    .center-frame-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .main-iframe {
+      width: 1300px;
+      height: 700px;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #0006;
+      border: none;
+      background: #2d2d37;
+      overflow: hidden;
+    }
+.tooltip-q {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 7px;
+  background: transparent;              /* No background fill */
+  color: #6366f1;                       /* Purple "?" for contrast */
+  border: 2px solid #6366f1;            /* Circle border */
+  border-radius: 50%;
+  text-align: center;
+  line-height: 16px;                    /* Center the ? vertically */
+  font-weight: bold;
+  font-size: 0.98rem;
+  position: relative;
+  cursor: pointer;
+  vertical-align: middle;
+  box-sizing: border-box;
+  transition: background 0.15s, color 0.15s;
+}
+.tooltip-q:hover::after {
+  content: "i livelli di rischio definiscono la pericolosità del livello del fiume";
+  white-space: pre;
+  position: absolute;
+  left: 50%;
+  top: 140%;
+  transform: translateX(-50%);
+  background: #23232a;
+  color: #fff;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: 0 4px 24px #0007;
+  z-index: 99;
+  min-width: 48px;
+  text-align: left;
+}
+
+  </style>
+</head>
+<body>
+  <div class="top-left-buttons">
+    <a href="StoricoConStatistiche.html">
+
+    <button>statistiche</button>
+</a>
+  </div>
+
+  <div class="top-right-buttons">
+
+    <div style="display: flex; align-items: center; gap: 8px;">
+  <span class="tooltip-q">?</span>
+
+      <label for="livelloRischio" style="font-size: 1.05rem; color: #fff;">livello rischio</label>
+      <select id="livelloRischio" style="padding: 8px 14px; border-radius: 8px; background: #23232a; color: #fff; border: none;">
+        <option value="basso">basso</option>
+        <option value="medio">medio</option>
+        <option value="alto">alto</option>
+      </select>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <label for="msgPrioritari" style="font-size: 1.05rem; color: #fff;">messaggi prioritari </label>
+      <select id="msgPrioritari" style="padding: 8px 14px; border-radius: 8px; background: #23232a; color: #fff; border: none;">
+        <option value="on">on</option>
+        <option value="off">off</option>
+      </select>
+    </div>
+
+    <a href="modificaDati.html" style="text-decoration: none;">
+      <button type="button">modifica dati personali</button>
+    </a>
+  </div>
+
+  <div class="center-frame-container">
+    <iframe class="main-iframe" src="" allowfullscreen></iframe>
+  </div>
+</body>
+</html>
