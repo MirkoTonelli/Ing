@@ -18,6 +18,8 @@
     }
     .input-row {
       display: flex;
+  flex-direction: column;
+
       gap: 10px;
       margin-bottom: 10px;
     }
@@ -60,10 +62,13 @@
   </style>
 </head>
 <body>
-  <form class="input-row" onsubmit="goToCoords(event)">
-    <input type="text" id="coords" placeholder="e.g. 41.9,12.5" required>
-    <button type="submit">Aggiungi</button>
-  </form>
+<form class="input-row" onsubmit="goToCoords(event)">
+  <input type="text" id="coords" placeholder="ID sensore" required>
+  <input type="text" id="name" placeholder="Posizione" required>
+  <input type="text" id="position" placeholder="Livello argine" required>
+  <button type="submit">Aggiungi</button>
+</form>
+
   <div class="map-container">
     <iframe id="mapFrame"
       src=""

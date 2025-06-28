@@ -69,7 +69,7 @@
 </head>
 <body>
   <form class="input-row" onsubmit="goToCoords(event)">
-    <input type="text" id="coords" placeholder="e.g. 41.9,12.5" required>
+    <input type="text" id="coords" placeholder="ID sensore" required>
     <input type="number" id="floatValue" placeholder="Float value" step="any" required>
     <button type="submit">Vai</button>
   </form>
@@ -82,7 +82,7 @@
   </div>
   <div class="float-value" id="floatDisplay"></div>
   <script>
-    function goToCoords(event) {
+    function goToCoords(event) {/*
       event.preventDefault();
       const input = document.getElementById('coords').value.trim();
       const floatVal = document.getElementById('floatValue').value.trim();
@@ -106,7 +106,7 @@
       const url = `https://maps.google.com/maps?q=${lat},${lon}&z=13&output=embed`;
       document.getElementById('mapFrame').src = url;
       document.getElementById('floatDisplay').textContent = "Float value: " + floatNum;
-    }
+    */}
   </script>
 </body>
 </html>
