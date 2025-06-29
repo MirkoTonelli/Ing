@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>storico con statistiche</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       margin: 0;
@@ -159,13 +160,18 @@
     <form id="filtersForm">
       <div class="filter-row">
         <label for="statOption">Statistiche:</label>
+        <div>
         <select id="statOption">
           <option value="media">media</option>
           <option value="minmax">min/max</option>
         </select>
-        <label for="dateTime">Data e ora:</label>
+        </div>
+        <div>
+        <label for="dateTime">Data inizio:</label>
         <input type="datetime-local" id="dateTime">
-       
+         <label for="dateTime">Data fine:</label>
+        <input type="datetime-local" id="dateTime">
+       </div>
 
     </form>
     <!-- Search row -->
@@ -184,36 +190,7 @@
       <iframe id="resultFrame" src=""></iframe>
     </div>
     <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Luogo (fiume)</th>
-            <th>Valore (m)</th>
-            <th>Data</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>idice</td>
-            <td>42.7</td>
-            <td>2024-06-27 14:30</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>idice</td>
-            <td>35.3</td>
-            <td>2024-06-27 09:15</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>idice</td>
-            <td>41.0</td>
-            <td>2024-06-26 20:02</td>
-          </tr>
-        </tbody>
-      </table>
+       <canvas id="myChart" width="400" height="200"></canvas>
     </div>
   </div>
   <script>
@@ -229,6 +206,34 @@
       // For demo: open a placeholder page in the iframe.
       document.getElementById('resultFrame').src = "https://www.example.com/";
     }
+  </script>
+  
+    <script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'line', // 'bar', 'pie', etc. also available
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May'],
+        datasets: [{
+          label: document.getElementById('statOption').value,
+          data: [12, 19, 3, 5, 2],
+          borderWidth: 2,
+          fill: false,
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          legend: {
+            labels: { color: 'white' }
+          }
+        }
+      }
+    });
   </script>
 </body>
 </html>
