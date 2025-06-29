@@ -52,6 +52,8 @@
       padding: 12px;
       border-radius: 10px;
       border: none;
+      margin-left: 20px;
+
       font-size: 1.1rem;
       background: #23232a;
       color: #fff;
@@ -76,6 +78,12 @@
 <body>
   <textarea placeholder="Type your message here..."></textarea>
   <form class="search-box" onsubmit="searchMap(event)">
+<div class="toggle-container">
+    <label for="priority-toggle" class="toggle-label"></label>
+    <span class="priority-label">prioritario</span>
+
+    <input type="checkbox" id="priority-toggle" class="toggle-checkbox">
+  </div>
     <input type="text" id="mapQuery" value="Rome, Italy" required>
     <button type="submit">Cerca</button>
   </form>
