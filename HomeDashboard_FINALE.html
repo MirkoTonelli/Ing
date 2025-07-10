@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IFrame Centered & Top Right Buttons</title>
+  <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjC4LSeKJD5o71luH52putUo3ReHt1CoU&callback=initMap"
+      defer
+    ></script>
+  <style>
+    #map {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+    body {
+      margin: 0;
+      background: #18181b;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+    .top-right-buttons {
+      position: fixed;
+      top: 32px;
+      right: 40px;
+      display: flex;
+      gap: 16px;
+      z-index: 100;
+    }
+    .top-right-buttons button {
+      background: #23232a;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 22px;
+      font-size: 1.03rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 3px 12px #0003;
+      transition: background 0.15s;
+    }
+    .top-right-buttons button:hover {
+      background: #6366f1;
+    }
+    .center-frame-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #map {
+  width: 1300px;   /* or any size you want */
+  height: 700px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px #0006;
+  background: #2d2d37;
+}
+    .main-iframe {
+      width: 1300px;
+      height: 700px;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #0006;
+      border: none;
+      background: #2d2d37;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-right-buttons">
+<a href="storico.html">
+
+    <button>apri storico</button>
+</a>
+<a href="registrazione.html">
+
+    <button>registrati</button>
+</a>
+
+<a href="login.html">
+    <button>accedi</button>
+</a>
+  </div>
+  <div class="center-frame-container">
+    <div id="map"></div>
+    
+  </div>
+
+
+  <script>
+      const darkModeStyles = [
+  { elementType: 'geometry', stylers: [{ color: '#212121' }] },
+  { elementType: 'labels.icon', stylers: [{ visibility: 'off' }] },
+  { elementType: 'labels.text.fill', stylers: [{ color: '#757575' }] },
+  { elementType: 'labels.text.stroke', stylers: [{ color: '#212121' }] },
+  { featureType: 'administrative', elementType: 'geometry', stylers: [{ color: '#757575' }] },
+  { featureType: 'poi', elementType: 'geometry', stylers: [{ color: '#2c2c2c' }] },
+  { featureType: 'poi.park', elementType: 'geometry', stylers: [{ color: '#181818' }] },
+  { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#383838' }] },
+  { featureType: 'road', elementType: 'geometry.stroke', stylers: [{ color: '#212121' }] },
+  { featureType: 'road', elementType: 'labels.text.fill', stylers: [{ color: '#8a8a8a' }] },
+  { featureType: 'transit', elementType: 'geometry', stylers: [{ color: '#2f2f2f' }] },
+  { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0015ff' }] },
+  { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#0037ff' }] },
+];
+
+      const CIRCLE_SVG = 'M -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
+
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById('map'), {
+          center: { lat: 44.49554944757558, lng: 11.342902418112871 },
+          zoom: 13,
+          styles: darkModeStyles,
+        });
+
+        const points = [
+          { pos: { lat: 44.446629637635084, lng: 11.436672872465717 }, color: 'yellow', stroke: 'lightblue' },
+          { pos: { lat: 44.439445841515614, lng: 11.44119128207126 }, color: 'red', stroke: 'lightblue' },
+          { pos: { lat: 44.43602140926186, lng: 11.435730701688835 }, color: 'green', stroke: 'lightblue' },
+        ];
+
+        points.forEach(p =>
+          new google.maps.Marker({
+            map,
+            position: p.pos,
+            icon: {
+              path: CIRCLE_SVG,
+              fillColor: p.color,
+              fillOpacity: 1,
+              strokeColor: p.stroke,
+              strokeWeight: 2,
+              scale: 1,
+              anchor: new google.maps.Point(0, 0),
+            },
+          })
+        );
+                  let currentScale = 1.5;
+
+let growing = true;
+        // Real-time tracking
+        if (navigator.geolocation) {
+          const userMarker = new google.maps.Marker({
+            map,
+            icon: {
+              path: CIRCLE_SVG,
+              fillColor: '#033dfc',
+              fillOpacity: 0.8,
+              strokeColor: 'black',
+              strokeWeight: 3,
+              scale: 1.8,
+              anchor: new google.maps.Point(0, 0),
+            },
+          });
+
+          const accuracyCircle = new google.maps.Circle({
+            strokeColor: '#033dfc',
+            strokeOpacity: 0.2,
+            strokeWeight: 1,
+            fillColor: '#033dfc',
+            fillOpacity: 0.1,
+            map: map,
+            center: { lat: 0, lng: 0 },
+            radius: 0,
+          });
+setInterval(() => {
+            if (growing) {
+              currentScale += 0.01;
+              if (currentScale >= 2.0) growing = false;
+            } else {
+              currentScale -= 0.01;
+              if (currentScale <= 1.5) growing = true;
+            }
+            userMarker.setIcon({
+              path: CIRCLE_SVG,
+              fillColor: '#144CFF',
+              fillOpacity: 0.8,
+              strokeColor: 'white',
+              strokeWeight: 3,
+              scale: currentScale,
+              anchor: new google.maps.Point(0, 0),
+            });
+          }, 50); // Smooth pulse
+          navigator.geolocation.watchPosition(
+            position => {
+              const userPos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              };
+              userMarker.setPosition(userPos);
+              accuracyCircle.setCenter(userPos);
+              accuracyCircle.setRadius(position.coords.accuracy);
+              map.setCenter(userPos); // optional: auto-center on user
+            },
+            error => {
+              console.error('Error getting position:', error);
+            },
+            {
+              enableHighAccuracy: true,
+              maximumAge: 0,
+              timeout: 10000,
+            }
+          );
+        } else {
+          console.error('Geolocation is not supported by this browser.');
+        }
+      }
+
+      // Ensure initMap is globally visible
+      window.initMap = initMap;
+    </script>
+</body>
+</html>
