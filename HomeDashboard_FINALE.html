@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IFrame Centered & Top Right Buttons</title>
+  <title>map autoupdate</title>
   <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjC4LSeKJD5o71luH52putUo3ReHt1CoU&callback=initMap"
       defer
@@ -50,12 +50,12 @@
       justify-content: center;
     }
     #map {
-  width: 1300px;   /* or any size you want */
-  height: 700px;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px #0006;
-  background: #2d2d37;
-}
+      width: 1300px;
+      height: 700px;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px #0006;
+      background: #2d2d37;
+    }
     .main-iframe {
       width: 1300px;
       height: 700px;
@@ -69,27 +69,22 @@
 </head>
 <body>
   <div class="top-right-buttons">
-<a href="storico.html">
-
-    <button>apri storico</button>
-</a>
-<a href="registrazione.html">
-
-    <button>registrati</button>
-</a>
-
-<a href="login.html">
-    <button>accedi</button>
-</a>
+    <a href="storico.html">
+      <button>apri storico</button>
+    </a>
+    <a href="registrazione.html">
+      <button>registrati</button>
+    </a>
+    <a href="login.html">
+      <button>accedi</button>
+    </a>
   </div>
   <div class="center-frame-container">
     <div id="map"></div>
-    
   </div>
 
-
   <script>
-      const darkModeStyles = [
+const darkModeStyles = [
   { elementType: 'geometry', stylers: [{ color: '#212121' }] },
   { elementType: 'labels.icon', stylers: [{ visibility: 'off' }] },
   { elementType: 'labels.text.fill', stylers: [{ color: '#757575' }] },
@@ -105,109 +100,164 @@
   { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#0037ff' }] },
 ];
 
-      const CIRCLE_SVG = 'M -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
+const CIRCLE_SVG = 'M -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
 
-      function initMap() {
-        const map = new google.maps.Map(document.getElementById('map'), {
-          center: { lat: 44.49554944757558, lng: 11.342902418112871 },
-          zoom: 13,
-          styles: darkModeStyles,
+function valueToColor(val) {
+  if (val > 66) return "red";
+  if (val > 33) return "yellow";
+  return "green";
+}
+
+let map;
+let sensorMarkers = [];
+
+function clearMarkers() {
+  sensorMarkers.forEach(marker => marker.setMap(null));
+  sensorMarkers = [];
+}
+
+function fetchAndUpdateSensors(center, radii) {
+  // Build the GET URL
+  const url = `https://35.228.106.14:8443/sensors?lat=${center.lat}&lng=${center.lng}&radii=${radii}`;
+  fetch(url)
+    .then(res => res.text())
+    .then(text => {
+      // Each line: id#lat#lng#value
+      const lines = text.trim().split('\n').filter(line => line);
+      clearMarkers();
+      lines.forEach(line => {
+        const parts = line.split('#');
+        if (parts.length !== 4) return;
+        const lat = parseFloat(parts[1]);
+        const lng = parseFloat(parts[2]);
+        const value = parseFloat(parts[3]);
+        const color = valueToColor(value);
+
+        const marker = new google.maps.Marker({
+          map,
+          position: { lat, lng },
+          icon: {
+            path: CIRCLE_SVG,
+            fillColor: color,
+            fillOpacity: 1,
+            strokeColor: 'lightblue',
+            strokeWeight: 2,
+            scale: 1,
+            anchor: new google.maps.Point(0, 0),
+          },
+          title: `${parts[0]} (${value})`
         });
+        sensorMarkers.push(marker);
+      });
+    })
+    .catch(err => {
+      console.error("Error fetching sensors:", err);
+      clearMarkers();
+    });
+}
 
-        const points = [
-          { pos: { lat: 44.446629637635084, lng: 11.436672872465717 }, color: 'yellow', stroke: 'lightblue' },
-          { pos: { lat: 44.439445841515614, lng: 11.44119128207126 }, color: 'red', stroke: 'lightblue' },
-          { pos: { lat: 44.43602140926186, lng: 11.435730701688835 }, color: 'green', stroke: 'lightblue' },
-        ];
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 44.49554944757558, lng: 11.342902418112871 },
+    zoom: 13,
+    styles: darkModeStyles,
+  });
 
-        points.forEach(p =>
-          new google.maps.Marker({
-            map,
-            position: p.pos,
-            icon: {
-              path: CIRCLE_SVG,
-              fillColor: p.color,
-              fillOpacity: 1,
-              strokeColor: p.stroke,
-              strokeWeight: 2,
-              scale: 1,
-              anchor: new google.maps.Point(0, 0),
-            },
-          })
-        );
-                  let currentScale = 1.5;
+  let radii = 0.01; // default
+  let userCenter = { lat: 44.49554944757558, lng: 11.342902418112871 };
 
-let growing = true;
-        // Real-time tracking
-        if (navigator.geolocation) {
-          const userMarker = new google.maps.Marker({
-            map,
-            icon: {
-              path: CIRCLE_SVG,
-              fillColor: '#033dfc',
-              fillOpacity: 0.8,
-              strokeColor: 'black',
-              strokeWeight: 3,
-              scale: 1.8,
-              anchor: new google.maps.Point(0, 0),
-            },
-          });
+  // Fetch on page load
+  fetchAndUpdateSensors(userCenter, radii);
 
-          const accuracyCircle = new google.maps.Circle({
-            strokeColor: '#033dfc',
-            strokeOpacity: 0.2,
-            strokeWeight: 1,
-            fillColor: '#033dfc',
-            fillOpacity: 0.1,
-            map: map,
-            center: { lat: 0, lng: 0 },
-            radius: 0,
-          });
-setInterval(() => {
-            if (growing) {
-              currentScale += 0.01;
-              if (currentScale >= 2.0) growing = false;
-            } else {
-              currentScale -= 0.01;
-              if (currentScale <= 1.5) growing = true;
-            }
-            userMarker.setIcon({
-              path: CIRCLE_SVG,
-              fillColor: '#144CFF',
-              fillOpacity: 0.8,
-              strokeColor: 'white',
-              strokeWeight: 3,
-              scale: currentScale,
-              anchor: new google.maps.Point(0, 0),
-            });
-          }, 50); // Smooth pulse
-          navigator.geolocation.watchPosition(
-            position => {
-              const userPos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-              };
-              userMarker.setPosition(userPos);
-              accuracyCircle.setCenter(userPos);
-              accuracyCircle.setRadius(position.coords.accuracy);
-              map.setCenter(userPos); // optional: auto-center on user
-            },
-            error => {
-              console.error('Error getting position:', error);
-            },
-            {
-              enableHighAccuracy: true,
-              maximumAge: 0,
-              timeout: 10000,
-            }
-          );
-        } else {
-          console.error('Geolocation is not supported by this browser.');
-        }
+  // Re-fetch every 30 seconds
+  setInterval(() => fetchAndUpdateSensors(userCenter, radii), 60000);
+
+  // Optionally: refetch on map move/zoom
+  map.addListener('idle', () => {
+    const center = map.getCenter();
+    const zoom = map.getZoom();
+    // You can adjust radii based on zoom if desired
+    userCenter = { lat: center.lat(), lng: center.lng() };
+    // Optionally: radii = ...;
+    fetchAndUpdateSensors(userCenter, radii);
+  });
+
+  // User location marker (pulse)
+  let currentScale = 1.5;
+  let growing = true;
+  if (navigator.geolocation) {
+    const userMarker = new google.maps.Marker({
+      map,
+      icon: {
+        path: CIRCLE_SVG,
+        fillColor: '#033dfc',
+        fillOpacity: 0.8,
+        strokeColor: 'black',
+        strokeWeight: 3,
+        scale: 1.8,
+        anchor: new google.maps.Point(0, 0),
+      },
+    });
+
+    const accuracyCircle = new google.maps.Circle({
+      strokeColor: '#033dfc',
+      strokeOpacity: 0.2,
+      strokeWeight: 1,
+      fillColor: '#033dfc',
+      fillOpacity: 0.1,
+      map: map,
+      center: { lat: 0, lng: 0 },
+      radius: 0,
+    });
+
+    setInterval(() => {
+      if (growing) {
+        currentScale += 0.01;
+        if (currentScale >= 2.0) growing = false;
+      } else {
+        currentScale -= 0.01;
+        if (currentScale <= 1.5) growing = true;
       }
+      userMarker.setIcon({
+        path: CIRCLE_SVG,
+        fillColor: '#144CFF',
+        fillOpacity: 0.8,
+        strokeColor: 'white',
+        strokeWeight: 3,
+        scale: currentScale,
+        anchor: new google.maps.Point(0, 0),
+      });
+    }, 50);
 
-      // Ensure initMap is globally visible
-      window.initMap = initMap;
-    </script>
+    navigator.geolocation.watchPosition(
+      position => {
+        const userPos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        userMarker.setPosition(userPos);
+        accuracyCircle.setCenter(userPos);
+        accuracyCircle.setRadius(position.coords.accuracy);
+        map.setCenter(userPos); // auto-center on user
+        userCenter = userPos; // Update center for next fetch
+        fetchAndUpdateSensors(userCenter, radii);
+      },
+      error => {
+        console.error('Error getting position:', error);
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 10000,
+      }
+    );
+  } else {
+    console.error('Geolocation is not supported by this browser.');
+  }
+}
+
+window.initMap = initMap;
+</script>
+
 </body>
 </html>
